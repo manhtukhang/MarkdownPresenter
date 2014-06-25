@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Markdownpresenter by manhtuvjp</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Markdownpresenter</h1>
+        <h2>Update: Follow link to recommended fork. For when you&#39;re giving a presentation in half an hour, and you haven&#39;t got the time to open up keynote...</h2>
+        <a href="https://github.com/manhtuvjp/MarkdownPresenter" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="notice" class="anchor" href="#notice"><span class="octicon octicon-link"></span></a>Notice</h1>
+
+<p>Please go to <a href="https://github.com/jsakamoto/MarkdownPresenter">https://github.com/jsakamoto/MarkdownPresenter</a> for a more up-to-date fork of this app :)</p>
+
+<h1>
+<a name="markdown-presenter" class="anchor" href="#markdown-presenter"><span class="octicon octicon-link"></span></a>Markdown Presenter</h1>
+
+<p>This is what I use for giving simple, quick-to-produce presentations. Rather than fighting with keynote or powerpoint for hours, I can whip up a presentation in minutes using markdown.</p>
+
+<h2>
+<a name="demo-and-usage" class="anchor" href="#demo-and-usage"><span class="octicon octicon-link"></span></a>Demo and usage</h2>
+
+<p>Check out a demo
+<a href="http://manhtuvjp.github.io/MarkdownPresenter/Presenter.html">here</a>.
+Use the arrow keys on your keyboard to switch between slides.</p>
+
+<p>You can reload the presentation at any time - staying on the same
+slide number - by pressing the spacebar.</p>
+
+<h2>
+<a name="installing" class="anchor" href="#installing"><span class="octicon octicon-link"></span></a>Installing</h2>
+
+<p>You need to install this on a web server, otherwise it won't be able
+to open the presentation.md file via AJAX. So, if you're on a Mac,
+copy it to your <code>~/Sites/MyPresentation</code> folder. Then open your web
+browser to http://localhost/~myusername/MyPresentation/Presenter.html.</p>
+
+<p>On Linux or Mac you have also likely Python installed and can start
+its built-in web server in this directory by running <code>python -m SimpleHTTPServer</code>.</p>
+
+<p>If you use <a href="http://www.iis.net/">IIS</a> or <a href="http://www.iis.net/learn/extensions/introduction-to-iis-express/iis-express-overview">IIS express</a> copy all the MarkdownPresenter files to the webfolder (normally <code>C:\Inetpub\wwwroot\&lt;SiteFolder&gt;</code> on IIS and <code>C:\Users\&lt;User&gt;\Documents\My Web Sites\&lt;WebSite&gt;</code> on IIS express). </p>
+
+<p>Also make sure that a MIME mapping for the .md extension is added. Either add the following mimeMap element to the <code>applicationhost.config</code> or the <code>web.config</code> file:</p>
+
+<pre><code>&lt;system.webServer&gt;
+  &lt;!-- there might be other configuration here. --&gt;
+  &lt;staticContent&gt;
+    &lt;!-- there might be other configuration here. --&gt;
+    &lt;mimeMap fileExtension=".md" mimeType="text/plain" /&gt;
+  &lt;/staticContent&gt;
+&lt;/system.webServer&gt;
+</code></pre>
+
+<h2>
+<a name="markdown-file" class="anchor" href="#markdown-file"><span class="octicon octicon-link"></span></a>Markdown file</h2>
+
+<p>The presentation.md file is where you put your presentation. All you need to do to separate slides is a paragraph with an exclamation mark, eg:</p>
+
+<pre><code>This is a slide
+Blah blah blah
+
+!
+
+This is another slide
+Yada yada yada
+</code></pre>
+
+<h2>
+<a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How it works</h2>
+
+<p>The <code>Presenter.html</code> fetches the <code>presentation.md</code> from the server via
+Ajax, uses <a href="https://github.com/coreyti/showdown">Showdown.js</a> to
+transform it into HTML, splits it on <code>&lt;p&gt;!&lt;/p&gt;</code> into individual
+slides, and displays the current slide.</p>
+
+<p>Note: Showdown
+<a href="https://github.com/coreyti/showdown#creating-markdown-extensions">supports custom extensions</a>
+that can either
+<a href="https://github.com/coreyti/showdown#regexreplace">replace</a> parts of
+the content based on a regular expression or
+<a href="https://github.com/coreyti/showdown#filter">transform the whole text</a>.
+There are some
+<a href="https://github.com/coreyti/showdown/tree/master/src/extensions">extensions already available</a>,
+for example
+<a href="https://github.com/coreyti/showdown/blob/master/src/extensions/prettify.js">prettify</a>
+that adds support for syntax highlighting or
+<a href="https://github.com/coreyti/showdown/blob/master/src/extensions/table.js">support for tables</a>.</p>
+
+<p>The current version of the bundled Showdown.js is 0.3.1 from Nov 2012.</p>
+
+<h2>
+<a name="related" class="anchor" href="#related"><span class="octicon octicon-link"></span></a>Related</h2>
+
+<ul>
+<li>
+<a href="https://github.com/hakimel/reveal.js/">Reveal.js</a>: full-featured
+HTML+JS presentation framework with support for Markdown in
+individual slides</li>
+<li>
+<a href="http://code.google.com/p/pagedown/wiki/PageDown">PageDown</a> - Stack
+Overflow's clone of Showdown</li>
+</ul>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/manhtuvjp/MarkdownPresenter/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/manhtuvjp/MarkdownPresenter/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/manhtuvjp/MarkdownPresenter"></a> is maintained by <a href="https://github.com/manhtuvjp">manhtuvjp</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
